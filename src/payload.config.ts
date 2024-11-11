@@ -119,15 +119,19 @@ export default buildConfig({
         }),
       ]
     },
-  }),
-  db: postgresAdapter({
+    }),
+    db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
+      ssl: {
+      rejectUnauthorized: false,
+      ca: process.env.SSL_ROOT_CERT64 ? Buffer.from(process.env.SSL_ROOT_CERT64, 'base64').toString('utf-8') : undefined,
+      },
     },
-  }),
-  collections: [Pages, Posts, Media, Categories, Users],
-  cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
-  endpoints: [
+    }),
+    collections: [Pages, Posts, Media, Categories, Users],
+    cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
+    endpoints: [
     // The seed endpoint is used to populate the database with some example data
     // You should delete this endpoint before deploying your site to production
     {
