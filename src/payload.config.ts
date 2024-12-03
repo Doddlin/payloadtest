@@ -26,6 +26,7 @@ import Categories from './collections/Categories'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Products } from './collections/Products'
 import Users from './collections/Users'
 import { seedHandler } from './endpoints/seedHandler'
 import { Footer } from './Footer/config'
@@ -129,7 +130,7 @@ export default buildConfig({
       },
     },
     }),
-    collections: [Pages, Posts, Media, Categories, Users],
+    collections: [Pages, Posts, Products, Media, Categories, Users],
     cors: [process.env.NEXT_PUBLIC_SERVER_URL || ''].filter(Boolean),
     endpoints: [
     // The seed endpoint is used to populate the database with some example data
@@ -198,7 +199,7 @@ export default buildConfig({
       },
     }),
     searchPlugin({
-      collections: ['posts'],
+      collections: ['posts', 'products'],
       beforeSync: beforeSyncWithSearch,
       searchOverrides: {
         fields: ({ defaultFields }) => {
